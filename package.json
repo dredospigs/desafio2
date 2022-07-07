@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon index.js",
     "test": "mocha ./src/tests/tests.spec.js",
-    "testJest": "jest"
+    "testJest": "jest "
   },
   "mocha": {
     "watch": true,
@@ -15,13 +15,12 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "@angular/core": "^14.0.4",
+  "dependencies": {  
+    "angular": "^1.6.6",  
     "chai": "^4.3.6",
     "chai-http": "^4.3.0",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
-    "jest": "^28.1.2",
     "mocha": "^10.0.0",
     "mongodb": "^4.5.0",
     "mongoose": "^6.3.2",
@@ -30,6 +29,7 @@
     "sinon": "^14.0.0"
   },
   "devDependencies": {
-    "angularjs-jest": "^0.1.4"
+    "angular-mocks": "^1.6.6",
+    "jest-cli": "^21.2.1"
   }
 }
