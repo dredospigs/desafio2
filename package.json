@@ -5,8 +5,7 @@
   "main": "connection.js",
   "scripts": {
     "start": "nodemon index.js",
-    "test": "mocha ./src/tests/tests.spec.js",
-    "testJest": "jest "
+    "test": "jest --coverage"
   },
   "mocha": {
     "watch": true,

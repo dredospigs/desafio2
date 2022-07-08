@@ -28,12 +28,13 @@
         }
     </style>
 
-    <script src="./angular/angular.js"></script>
+    <script src="./angular/lib/angular.js"></script>
     <script src="./angular/app.js"></script>
     <script src="./angular/filters/ellipsisFilter.js"></script>
     <script src="./angular/controllers/playersController.js"></script>
     <script src="./angular/services/playerService.js"></script>
     <script src="./angular/values/configValue.js"></script>
+    <script src="./angular/components/mainScreen.js"></script>
     <script src="https://kit.fontawesome.com/d5fce85c78.js" crossorigin="anonymous"></script>
     <script 
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" 
@@ -52,172 +53,8 @@
     </script>
 </head>
 
-<body ng-controller="mainController">    
-    <!-- main -->
-    <div class="bg-black rounded-4 mt-5 mx-4 p-5">        
-        <h2 class="display-5 text-primary">
-            <i ng-class="iconMsg"></i>
-            {{msg}}
-        </h2>
-
-        <form class="row g-3" style="margin-top: 1em; margin-bottom: 2em;">
-            <div class="col-md-9">
-                <div class="input-group w-10" >
-                    <span class="input-group-text" id="basic-addon1">
-                        <i class="bi bi-search"></i>
-                    </span>
-                    <input type="text" ng-disabled="changing" class="form-control" placeholder="Quem você busca?" aria-label="Input group example" ng-model="busca">
-                </div>
-            </div>
-            <div class="col-md-3">
-              <select id="inputState" class="form-select" ng-disabled="changing" ng-model="option" ng-click="orderBy(option)">
-                <option value="">Ordenar por</option>
-                <option>A-Z</option>
-                <option>Z-A</option>
-                <option>Mais moedas</option>
-                <option>Menos moedas</option>
-              </select>
-            </div>
-        </form>
-
-        <table ng-show="users.length > 0" class="table table-bordered table-dark table-hover">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Coins</th>
-                    <th scope="col">Medals</th>
-                    <th scope="col">Trophies</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody ng-repeat="user in users | filter:{name:busca} | orderBy:orderCriterion:orderDirection">
-                <tr>
-                    <td><input class="form-check-input" ng-disabled="changing" ng-model="user.selecionado" type="checkbox" id="checkboxNoLabel" value="" aria-label="..."></td>
-                    <td>{{user.name | ellipsis:20}}</td>
-                    <td>{{user.coins}}</td>
-                    <td>{{user.medals}}</td>
-                    <td>{{user.trophies}}</td>
-                    <td>
-                        <button type="button" ng-disabled="isSelecionado(users) || changing" class="btn btn-success" ng-click="editPlayer(user)">
-                            <i class="bi bi-pencil-square" ></i>
-                        </button>
-                    </td>
-                    <td>
-                        <button type="button" ng-disabled="isSelecionado(users) || changing " class="btn btn-danger" ng-click="confirmDeletePlayer(user, true)">
-                            <i class="bi bi-trash text-light" ></i>
-                        </button>
-                    </td>                    
-                </tr>
-            </tbody>
-        </table>   
-
-        <button class="btn btn-danger" ng-click="confirmDeletePlayer(users, false)" ng-show="isSelecionado(users)">Deletar jogadores</button>
-        <button class="btn btn-success" ng-disabled="changing" ng-hide="insert || isSelecionado(users)" ng-click="insert = !insert">Novo Jogador</button>
-        <button class="btn btn-danger" ng-show="insert" ng-click="insert = !insert">CANCELAR</button>
-        
-        <div class="border border-2 rounded-4 p-4 mt-4" ng-show="insert">
-            
-            <form name="formsUser" class="row g-3">
-                <div class="col-md-9 form-floating">
-                    <input class="form-control" type="text" ng-model="user.name" name="nome" placeholder="nome" ng-required="true" ng-minlength="10"/>
-                    <label for="floatingInput">Nome</label>
-                </div>
-                <div class="col-md-3 form-floating">
-                    <input class="form-control" type="number" ng-model="user.coins" name="coins" placeholder="coins" ng-required="true"/>
-                    <label for="floatingInput">Coins</label>
-                </div>                
-            </form>    
-
-            <div ng-show="formsUser.nome.$error.minlength" class="alert alert-danger d-flex align-items-center" role="alert" style="margin-top: 2%">
-                <i class="bi bi-exclamation-triangle-fill"></i>
-                <div style="margin-left: 1%;">
-                    O Nome deve conter ao menos 10 letras!
-                </div>
-            </div>
-            <div ng-show="formsUser.nome.$error.required && formsUser.nome.$dirty" class="alert alert-danger d-flex align-items-center" role="alert" style="margin-top: 2%">
-                <i class="bi bi-exclamation-triangle-fill"></i>
-                <div style="margin-left: 1%;">
-                    Favor preencher o campo de nome!
-                </div>
-            </div>
-            <div ng-show="formsUser.coins.$error.required && formsUser.coins.$dirty" class="alert alert-danger d-flex align-items-center" role="alert" style="margin-top: 2%">
-                <i class="bi bi-exclamation-triangle-fill"></i>
-                <div style="margin-left: 1%;">
-                    Favor preencher o campo de moedas!
-                </div>
-            </div>
-            
-            <div class="d-grid gap-2 col-5 mx-auto" style="margin: 2%">
-                <button class="btn btn-success" ng-click="adicionarJogador(user)" ng-disabled="formsUser.$invalid">Adicionar</button>
-            </div>
-        </div>
-    </div> 
-
-    <!-- updateToast -->
-    <div aria-live="polite" aria-atomic="true" class="position-relative">
-        <div class="toast-container top-50 start-50 translate-middle p-3" style="position: fixed;">
-            <div class="toast" data-bs-autohide="false" style="--bs-bg-opacity: .9; background-color: #202020; min-width: 450px;" id="updateToast" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header text-bg-secondary p-3">     
-                    <strong class="ml-2" style="font-size: 1.3em; margin-left: 2%;">Digite a nova quantidade de moedas:</strong>
-                    <button type="button" class="btn-close btn-close-white me-2 m-auto" ng-click="newCoins = ''; changing = !changing" data-bs-dismiss="toast" aria-label="Close"></button>
-                </div>
-                <div class="toast-body p-4">
-                    <input class="form-control" ng-model="newCoins" type="number" placeholder="Moedas!" aria-label="default input example">
-                    <div class="row">
-                        <div class="col">
-                            <button type="button" ng-click="updatePlayer()" ng-disabled="!newCoins" class="btn btn-primary my-3 px-4">Atualizar</button>
-                        </div>
-                        <div class="col">
-                            <button type="button" data-bs-dismiss="toast" ng-click="newCoins = ''; changing = !changing" class="btn btn-outline-secondary my-3 px-4">Cancelar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- sideToast -->
-    <div aria-live="polite" aria-atomic="true" class="position-relative">
-        <div class="toast-container bottom-0 end-0 p-3" style="position: fixed;">
-            <div class="toast" ng-style="toastBody" id="sideToast" role="alert" aria-live="assertive" aria-atomic="true">
-                <div ng-class="toastHeader">     
-                    <div class="fs-3">
-                        <i ng-class="toastIcon"></i>
-                    </div>           
-                    <strong class="ml-2" style="font-size: 1.5em; margin-left: 2%;">{{toastTitle}}</strong>
-                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-                </div>
-                <div class="toast-body">
-                    {{toastText}}
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- deleteToast -->
-    <div aria-live="polite" aria-atomic="true" class="position-relative">
-        <div class="toast-container top-50 start-50 translate-middle p-3" style="position: fixed;">
-            <div class="toast" data-bs-autohide="false" style="--bs-bg-opacity: .9; background-color: #202020; min-width: 450px;" id="deleteToast" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header text-bg-danger p-3">     
-                    <strong class="ml-2" style="font-size: 1.3em; margin-left: 2%;">Atenção!</strong>
-                    <button type="button" class="btn-close btn-close-white me-2 m-auto" ng-click="changing = !changing" data-bs-dismiss="toast" aria-label="Close"></button>
-                </div>
-                <div class="toast-body p-4">
-                    <p class="text-light" style="white-space: pre-wrap">{{confirmDeleteMsg}}</p>
-                    <div class="row">
-                        <div class="col">
-                            <button type="button" ng-show="!onlyOne" ng-click="deleteMultiplePlayers()" class="btn btn-outline-danger my-3 px-4">Confirmar</button>
-                            <button type="button" ng-show="onlyOne" ng-click="deletePlayer()" class="btn btn-outline-danger my-3 px-4">Confirmar</button>
-                        </div>
-                        <div class="col">
-                            <button type="button" data-bs-dismiss="toast" ng-click="changing = !changing" class="btn btn-outline-secondary my-3 px-4">Cancelar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<body>
+    <main-screen></main-screen>
+    <div ng-include="'angular/views/footer.html'"></div>
 </body>
 </html>
