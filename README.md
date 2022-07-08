@@ -8,7 +8,7 @@ Uma atualização do primeiro projeto do desafio dos estagiários onde tinhamos 
 - `Exclusão de jogadores` Através de um botão em cada linha do jogador, o usuário pode deletar esse player, ou, caso opte por deletar vários de uma vez, o usuário pode selecionar o jogador através de uma checkbox e em seguida deletar vários de uma vez
 - `Atualização dos jogadores` Através de um botão em cada linha do jogador, o usuário pode atualizar o número de moedas desse player
 - `Criação do jogador` Por meio de um pequeno formulário, o usuário pode criar um novo jogador para o sistema
--`Filtro de busca e de ordem` Utilizando um input na parte de cima da tabela, o usuário pode facilmente pesquisar um player especifico e ordena-los da forma que quiser
+- `Filtro de busca e de ordem` Utilizando um input na parte de cima da tabela, o usuário pode facilmente pesquisar um player especifico e ordena-los da forma que quiser
 
 
 ## ✔️ Técnicas e tecnologias utilizadas
