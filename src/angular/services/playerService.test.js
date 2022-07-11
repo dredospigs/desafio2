@@ -37,5 +37,17 @@ describe('Player Service', function () {
         expect(result[0].coins).toEqual(10)
       })
     })
+
+    it('should check if the post service was called', async function(){
+      httpBackend.whenPOST(configs.baseUrl + '/jogadores').respond(200)
+
+      var res = _playerService.createPlayer()
+      httpBackend.flush()
+
+      res.then(function(response) {
+        const result = response.data
+        expect(result.status).toEqual(200)
+      })
+    })
   })
 });

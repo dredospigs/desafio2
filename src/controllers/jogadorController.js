@@ -26,7 +26,7 @@ const createJogador = async function cadastrarJogador(req, res){
             res.send(`Houve um erro na criação do jogador! Erro:${err.message}`);
         }
         else{
-            res.status(201).send('O jogador foi cadastrado com sucesso!');
+            res.status(200).send('O jogador foi cadastrado com sucesso!');
         }
     })
 }
@@ -36,7 +36,7 @@ const updateJogador = (req, res) => {
 
     try {
         atualizarJogador(id, req.body);
-        res.status(201).send('A atualização foi feita com sucesso!');
+        res.status(200).send('A atualização foi feita com sucesso!');
     } catch (error) {
         res.send(`Houve um erro na hora de atualizar o jogador! Erro: ${error}`);
     }
@@ -47,7 +47,7 @@ const deletarJogador = (req, res) => {
 
     try {
         deleteJogador(id);
-        res.status(201).send('O jogador foi deletado com sucesso!');
+        res.status(200).send('O jogador foi deletado com sucesso!');
     } catch (error) {
         res.send(`Houve um erro na hora de deletar o jogador! Erro: ${error}`);
     }

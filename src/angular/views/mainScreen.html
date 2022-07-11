@@ -1,7 +1,8 @@
 <!-- main -->
 <div class="bg-black rounded-4 mt-5 mx-4 p-5">
     <h2 class="display-5 text-primary">
-        <i ng-class="iconMsg"></i>
+        <i ng-show="everythingOk" class="fa-solid fa-gamepad fa-bounce" style="--fa-animation-iteration-count : 2"></i>
+        <i ng-show="!everythingOk" class="fa-solid fa-triangle-exclamation fa-beat-fade"></i>
         {{msg}}
     </h2>
 
@@ -73,12 +74,12 @@
 
         <form name="formsUser" class="row g-3">
             <div class="col-md-9 form-floating">
-                <input class="form-control" type="text" ng-model="user.name" name="nome" placeholder="nome"
+                <input class="form-control" type="text" ng-disabled="changing" ng-model="user.name" name="nome" placeholder="nome"
                     ng-required="true" ng-minlength="10" />
                 <label for="floatingInput">Nome</label>
             </div>
             <div class="col-md-3 form-floating">
-                <input class="form-control" type="number" ng-model="user.coins" name="coins" placeholder="coins"
+                <input class="form-control" type="number" ng-disabled="changing" ng-model="user.coins" name="coins" placeholder="coins"
                     ng-required="true" />
                 <label for="floatingInput">Coins</label>
             </div>
@@ -108,7 +109,7 @@
 
         <div class="d-grid gap-2 col-5 mx-auto" style="margin: 2%">
             <button class="btn btn-success" ng-click="adicionarJogador(user)"
-                ng-disabled="formsUser.$invalid">Adicionar</button>
+                ng-disabled="formsUser.$invalid || changing">Adicionar</button>
         </div>
     </div>
 </div>

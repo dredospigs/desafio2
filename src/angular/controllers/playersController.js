@@ -1,4 +1,4 @@
-angular.module('api').controller('mainController', ($scope, playersAPI)=>{
+angular.module('api').controller('mainController', function($scope, playersAPI){
     var changingPlayer
     $scope.users = []   
     $scope.insert = false
@@ -8,11 +8,11 @@ angular.module('api').controller('mainController', ($scope, playersAPI)=>{
         .then((res) => {            
                 $scope.msg = "Jogadores"
                 $scope.users = res.data
-                $scope.iconMsg = "fa-solid fa-gamepad"
+                $scope.everythingOk = true
             })
         .catch(() => {
                 $scope.msg = "Houve um erro para receber os jogadores"
-                $scope.iconMsg = "fa-solid fa-triangle-exclamation fa-beat-fade"
+                $scope.everythingOk = false
             })
     }
 
