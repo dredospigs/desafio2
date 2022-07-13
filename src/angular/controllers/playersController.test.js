@@ -42,16 +42,12 @@ describe('Players Controller', function () {
       expect(vm.orderCriterion).toEqual('coins')
       expect(vm.orderDirection).toEqual(true)
     })
+  })
 
-    it.skip('should change the status of the application to "changing" when the editPlayer function is called', function (){
+  describe('other functions', function (){    
+    it('should change the status of the application to "changing" when the editPlayer function is called', function (){
       const vm = newControllerInstance()
       vm.editPlayer()
-      expect(vm.changing).toEqual(true)
-    })
-
-    it.skip('should change the status of the application to "changing" when the confirmDeletePlayer function is called', function (){
-      const vm = newControllerInstance()
-      vm.confirmDeletePlayer()
       expect(vm.changing).toEqual(true)
     })
   })
