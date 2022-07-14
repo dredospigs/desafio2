@@ -3,7 +3,7 @@ angular.module('api').controller('mainController', function($scope, playersAPI){
     $scope.users = []   
     $scope.insert = false
 
-    function carregarJogadores(){
+    function loadPlayers(){
         playersAPI.readPlayers()
         .then((res) => {            
                 $scope.msg = "Jogadores"
@@ -21,7 +21,7 @@ angular.module('api').controller('mainController', function($scope, playersAPI){
         playersAPI.createPlayer(player)
         .then((data) => {
                 delete $scope.user
-                carregarJogadores()
+                loadPlayers()
                 $scope.formsUser.$setPristine();
                 $scope.insert = !$scope.insert
 
@@ -145,7 +145,7 @@ angular.module('api').controller('mainController', function($scope, playersAPI){
         playersAPI.updatePlayer(changingPlayer._id, update)
         .then(() => {
             delete $scope.user
-            carregarJogadores()
+            loadPlayers()
             $scope.toastHeader = 'toast-header text-bg-success'
             $scope.toastBody = {'--bs-bg-opacity': '.9', 'background-color': '#5ae974'}
             $scope.toastTitle = 'Sucesso!'
@@ -196,5 +196,5 @@ angular.module('api').controller('mainController', function($scope, playersAPI){
         }
     }
 
-    carregarJogadores()
+    loadPlayers()
 })
