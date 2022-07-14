@@ -16,7 +16,7 @@ angular.module('api').controller('mainController', function($scope, playersAPI){
             })
     }
 
-    $scope.adicionarJogador = function(player){  
+    $scope.addPlayer = function(player){  
         var sideToast = new bootstrap.Toast(document.getElementById("sideToast"))              
         playersAPI.createPlayer(player)
         .then((data) => {
@@ -171,7 +171,7 @@ angular.module('api').controller('mainController', function($scope, playersAPI){
         $scope.changing = false
     }
 
-    $scope.isSelecionado = function(players){
+    $scope.isSelected = function(players){
         return players.some(function(player){
             return player.selecionado;
         })

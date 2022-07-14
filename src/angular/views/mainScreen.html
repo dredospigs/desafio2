@@ -49,13 +49,13 @@
                 <td>{{user.medals}}</td>
                 <td>{{user.trophies}}</td>
                 <td>
-                    <button type="button" ng-disabled="isSelecionado(users) || changing" class="btn btn-success"
+                    <button type="button" ng-disabled="isSelected(users) || changing" class="btn btn-success"
                         ng-click="editPlayer(user)">
                         <i class="bi bi-pencil-square"></i>
                     </button>
                 </td>
                 <td>
-                    <button type="button" ng-disabled="isSelecionado(users) || changing " class="btn btn-danger"
+                    <button type="button" ng-disabled="isSelected(users) || changing " class="btn btn-danger"
                         ng-click="confirmDeletePlayer(user, true)">
                         <i class="bi bi-trash text-light"></i>
                     </button>
@@ -64,9 +64,9 @@
         </tbody>
     </table>
 
-    <button class="btn btn-danger" ng-click="confirmDeletePlayer(users, false)" ng-show="isSelecionado(users)">Deletar
+    <button class="btn btn-danger" ng-click="confirmDeletePlayer(users, false)" ng-show="isSelected(users)">Deletar
         jogadores</button>
-    <button class="btn btn-success" ng-disabled="changing" ng-hide="insert || isSelecionado(users)"
+    <button class="btn btn-success" ng-disabled="changing" ng-hide="insert || isSelected(users)"
         ng-click="insert = !insert">Novo Jogador</button>
     <button class="btn btn-danger" ng-show="insert" ng-click="insert = !insert">CANCELAR</button>
 
@@ -108,7 +108,7 @@
         </div>
 
         <div class="d-grid gap-2 col-5 mx-auto" style="margin: 2%">
-            <button class="btn btn-success" ng-click="adicionarJogador(user)"
+            <button class="btn btn-success" ng-click="addPlayer(user)"
                 ng-disabled="formsUser.$invalid || changing">Adicionar</button>
         </div>
     </div>
