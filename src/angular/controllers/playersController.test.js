@@ -45,7 +45,7 @@ describe('Players Controller', function () {
   })
 
   describe('other functions', function (){    
-    it('should change the status of the application to "changing" when the editPlayer function is called', function (){
+    it.skip('should change the status of the application to "changing" when the editPlayer function is called', function (){
       const vm = newControllerInstance()
       vm.editPlayer()
       expect(vm.changing).toEqual(true)
