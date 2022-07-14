@@ -45,6 +45,36 @@ describe('Players Controller', function () {
   })
 
   describe('other functions', function (){    
+    it('should initialize with the default informations', function (){
+      const vm = newControllerInstance()
+
+      expect(vm.users).toEqual([])
+      expect(vm.insert).toEqual(false)
+    })
+
+    it('should check if there is any player set as "selecionado"', function(){
+      const vm = newControllerInstance()
+      const data = [
+        {'name' : 'aubrey', 'coins' : 35, 'selecionado' : true}, 
+        {'name' : 'basil', 'coins' : 15, 'selecionado' : false}
+      ]
+
+      var res = vm.isSelecionado(data)
+
+      expect(res).toEqual(true)
+    })
+
+    it('should return false when dont have any player set as "selecionado"', function(){
+      const vm = newControllerInstance()
+      const data = [
+        {'name' : 'hammond', 'coins' : 22, 'selecionado' : false}
+      ]
+
+      var res = vm.isSelecionado(data)
+
+      expect(res).toEqual(false)
+    })
+
     it.skip('should change the status of the application to "changing" when the editPlayer function is called', function (){
       const vm = newControllerInstance()
       vm.editPlayer()

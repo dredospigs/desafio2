@@ -24,7 +24,7 @@ describe('Player Service', function () {
     it('should get all players', async function () {
       httpBackend.whenGET(configs.baseUrl + '/jogadores')
       .respond(200, [{
-        name: 'Joao',
+        name: 'Elaina',
         coins: 10
       }])
 
@@ -33,7 +33,7 @@ describe('Player Service', function () {
 
       res.then(function (response) {
         const result = response.data
-        expect(result[0].name).toEqual('Joao')
+        expect(result[0].name).toEqual('Elaina')
         expect(result[0].coins).toEqual(10)
       })
     })
