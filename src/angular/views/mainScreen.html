@@ -44,7 +44,8 @@
             <tr>
                 <td><input class="form-check-input" ng-disabled="changing" ng-model="user.selecionado" type="checkbox"
                         id="checkboxNoLabel" value="" aria-label="..."></td>
-                <td>{{user.name | ellipsis:20}}</td>
+                <td data-toggle="tooltip" data-placement="top" title="{{user.name}}">
+                    {{user.name | ellipsis:20}}</td>
                 <td>{{user.coins}}</td>
                 <td>{{user.medals}}</td>
                 <td>{{user.trophies}}</td>
