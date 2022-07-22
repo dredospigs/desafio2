@@ -59,7 +59,7 @@ describe('Players Controller', function () {
         {'name' : 'basil', 'coins' : 15, 'selecionado' : false}
       ]
 
-      var res = vm.isSelecionado(data)
+      var res = vm.isSelected(data)
 
       expect(res).toEqual(true)
     })
@@ -70,7 +70,7 @@ describe('Players Controller', function () {
         {'name' : 'hammond', 'coins' : 22, 'selecionado' : false}
       ]
 
-      var res = vm.isSelecionado(data)
+      var res = vm.isSelected(data)
 
       expect(res).toEqual(false)
     })
